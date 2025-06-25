@@ -1,11 +1,13 @@
+import AddTodoFrom from "@/components/myUi/AddTodoFrom";
+
 const page = () => {
-  return (
-    <>
-      <div className="grid place-items-center h-dvh">
-        <div className="">Hello World</div>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <div className="pt-20">
+                <AddTodoFrom />
+            </div>
+        </>
+    );
 };
 
 export default page;

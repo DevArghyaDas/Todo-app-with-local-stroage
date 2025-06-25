@@ -1,0 +1,51 @@
+"use client";
+import { todosAtom } from "@/lib/atom";
+import { useAtom } from "jotai";
+import { FormEvent, useState } from "react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { Plus } from "lucide-react";
+
+// Atom to store todos array in localStorage
+
+// Sync atom with localStorage
+// todosAtom.onMount = (setAtom) => {
+//     const handler = () => {
+//         setAtom(JSON.parse(localStorage.getItem("todos") || "[]"));
+//     };
+//     window.addEventListener("storage", handler);
+//     return () => window.removeEventListener("storage", handler);
+// };
+
+const AddTodoFrom = () => {
+    const [inputValue, setInputValue] = useState("");
+    const [todos, setTodos] = useAtom(todosAtom);
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        if (!inputValue.trim()) return;
+        const newTodos = [...todos, inputValue.trim()];
+        setTodos(newTodos);
+        setInputValue("");
+    };
+
+    return (
+        <form
+            onSubmit={handleSubmit}
+            className="flex items-center gap-4 border-b px-3 pb-5">
+            <Input
+                type="text"
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                placeholder="Add a todo"
+            />
+            <Button
+                type="submit"
+                className="cursor-pointer">
+                Add Todo <Plus />
+            </Button>
+        </form>
+    );
+};
+
+export default AddTodoFrom;
