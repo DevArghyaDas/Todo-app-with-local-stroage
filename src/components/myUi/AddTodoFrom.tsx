@@ -1,21 +1,14 @@
 "use client";
+
 import { todosAtom } from "@/lib/atom";
 import { useAtom } from "jotai";
-import { FormEvent, useState } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import { Plus } from "lucide-react";
+import { FormEvent, useState } from "react";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import toast from "react-hot-toast";
 
 // Atom to store todos array in localStorage
-
-// Sync atom with localStorage
-// todosAtom.onMount = (setAtom) => {
-//     const handler = () => {
-//         setAtom(JSON.parse(localStorage.getItem("todos") || "[]"));
-//     };
-//     window.addEventListener("storage", handler);
-//     return () => window.removeEventListener("storage", handler);
-// };
 
 const AddTodoFrom = () => {
     const [inputValue, setInputValue] = useState("");
@@ -23,10 +16,17 @@ const AddTodoFrom = () => {
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
+
         if (!inputValue.trim()) return;
-        const newTodos = [...todos, inputValue.trim()];
-        setTodos(newTodos);
-        setInputValue("");
+
+        if (inputValue.length >= 5) {
+            const newTodos = [...todos, inputValue.trim()];
+            setTodos(newTodos);
+            toast.success("Todo successfully added");
+            setInputValue("");
+        } else {
+            toast.error("todo-field must contain 5 characters");
+        }
     };
 
     return (
@@ -41,7 +41,10 @@ const AddTodoFrom = () => {
             />
             <Button
                 type="submit"
-                className="cursor-pointer">
+                className="cursor-pointer"
+                disabled={
+                    (inputValue === "" && true) || (inputValue === null && true)
+                }>
                 Add Todo <Plus />
             </Button>
         </form>
