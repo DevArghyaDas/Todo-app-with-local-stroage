@@ -2,9 +2,11 @@ import AddTodoFrom from "@/components/myUi/AddTodoFrom";
 import ShowAllTodo from "@/components/myUi/ShowAllTodo";
 import { Metadata } from "next";
 
-export const metaData: Metadata = {
-    title: "Todo | Home",
-    description: "homepage of todo app",
+export const generateMetadata = (): Metadata => {
+    return {
+        title: "Todo | Home",
+        description: "homepage of todo app",
+    };
 };
 
 const page = () => {
