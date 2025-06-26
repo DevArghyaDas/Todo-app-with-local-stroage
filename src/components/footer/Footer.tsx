@@ -1,3 +1,7 @@
+"use client";
+
+import Image from "next/image";
+
 const Footer = () => {
     return (
         <>
@@ -6,6 +10,15 @@ const Footer = () => {
                     &copy; {new Date().getFullYear()} Todo App. All rights
                     reserved.
                 </p>
+
+                <a href="https://github.com/DevArghyaDas">
+                    <Image
+                        height={100}
+                        width={100}
+                        src="/github.svg"
+                        alt="github"
+                    />
+                </a>
             </footer>
         </>
     );
