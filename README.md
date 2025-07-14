@@ -1,6 +1,5 @@
 This is a [Next.js](https://nextjs.org) app | minimalistic Desing | easy to use ✌️.
 
-## Getting Started
 
 ## About This App
 
